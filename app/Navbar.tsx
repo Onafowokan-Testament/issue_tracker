@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React from "react";
 import { FaBug, FaBugSlash } from "react-icons/fa6";
 import classnames from "classnames";
+
 const Navbar = () => {
   const NavLinks = [
     {
@@ -16,7 +16,7 @@ const Navbar = () => {
 
   const currentPath = usePathname();
   return (
-    <nav className="flex space-x-5 border-b h-14 items-center  px-5 ">
+    <nav className="flex space-x-5 border-b h-14 items-center  px-5 f ">
       <Link href={"/"}>
         <FaBug />
       </Link>
