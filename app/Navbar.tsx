@@ -1,8 +1,20 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React from "react";
 import { FaBug, FaBugSlash } from "react-icons/fa6";
-
+import classnames from "classnames";
 const Navbar = () => {
+  const NavLinks = [
+    {
+      label: "Dashboard",
+      href: "/",
+    },
+    { label: "Issues", href: "/issues" },
+  ];
+
+  const currentPath = usePathname();
   return (
     <nav className="flex space-x-5 border-b h-14 items-center  px-5 ">
       <Link href={"/"}>
@@ -10,23 +22,21 @@ const Navbar = () => {
       </Link>
 
       <ul className="flex space-x-5">
-        <li>
-          <Link
-            href={"/"}
-            className=" text-zinc-500 hover:text-zinc-800 transition-colors"
-          >
-            {" "}
-            Dashboard
-          </Link>
-        </li>
-        <li>
-          <Link
-            href={"/"}
-            className=" text-zinc-500 hover:text-zinc-800 transition-colors"
-          >
-            Issues
-          </Link>
-        </li>
+        {NavLinks.map((navlink) => (
+          <li>
+            <Link
+              href={navlink.href}
+              className={classnames({
+                "text-zinc-500": currentPath !== navlink.href,
+                "text-zinc-900": currentPath === navlink.href,
+                "transition-colors": true,
+              })}
+            >
+              {" "}
+              {navlink.label}
+            </Link>
+          </li>
+        ))}
       </ul>
     </nav>
   );
