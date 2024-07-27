@@ -31,8 +31,7 @@ const IssueTracker = async () => {
           {issues.map((issue) => (
             <Table.Row key={issue.Id}>
               <Table.Cell>
-                {issue.title}
-
+                <Link href={`/issues/${issue.Id}`}>{issue.title}</Link>
                 <div className="block md:hidden">{issue.status}</div>
               </Table.Cell>
               <Table.Cell className=" hidden md:table-cell">
