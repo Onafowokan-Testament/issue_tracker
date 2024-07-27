@@ -15,20 +15,20 @@ import Spinner from "@/app/components/Spinner";
 
 type IssueForm = z.infer<typeof createIssueSchema>;
 
+const {
+  register,
+  control,
+  handleSubmit,
+  formState: { errors },
+} = useForm<IssueForm>({
+  resolver: zodResolver(createIssueSchema),
+});
+
+const router = useRouter();
+const [isLoading, setIsLoading] = useState(false);
+
 const createNewIssue = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
-
   const [error, setError] = useState("");
-
-  const {
-    register,
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IssueForm>({
-    resolver: zodResolver(createIssueSchema),
-  });
 
   return (
     <div className="max-w-xl my-5">
