@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@radix-ui/themes/styles.css";
 import "./globals.css";
-import { Theme, ThemePanel } from "@radix-ui/themes";
+import { Container, Theme, ThemePanel } from "@radix-ui/themes";
 import Navbar from "./Navbar";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -23,7 +23,9 @@ export default function RootLayout({
         <Theme accentColor="iris" grayColor="mauve">
           <Navbar />
 
-          <main className="px-10">{children}</main>
+          <main className="px-10">
+            <Container>{children}</Container>
+          </main>
         </Theme>
       </body>
     </html>

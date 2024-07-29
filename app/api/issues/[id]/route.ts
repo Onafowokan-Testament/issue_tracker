@@ -29,3 +29,23 @@ export async function PUT(request: NextRequest, { params }: Props) {
 
   return NextResponse.json(updatedIssue, { status: 201 });
 }
+
+export async function DELETE(request: NextRequest, { params }: Props) {
+  const body = await request.json();
+  const validation = createIssueSchema.safeParse(body);
+  if (!validation.success)
+    return NextResponse.json("Bad request", { status: 400 });
+
+  const issue = await prisma.issue.findUnique({
+    where: { Id: parseInt(params.id) },
+  });
+
+  if (!issue) return NextResponse.json({error:'issue not found'} {status: 400})
+
+
+  const deleted_issue = await prisma.issue.delete({
+    where: { Id: issue.Id },
+  })
+
+  return NextResponse.json(deleted_issue, {status:201} )
+}

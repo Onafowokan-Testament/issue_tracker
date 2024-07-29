@@ -3,9 +3,9 @@ import React from "react";
 
 const EditIssueButton = ({ issueId }: { issueId: number }) => {
   return (
-    <Link href={`/issues/${issueId}/edit`}>
-      <Button>Edit</Button>
-    </Link>
+    <Button color="blue">
+      <Link href={`/issues/${issueId}/edit`}>Edit</Link>
+    </Button>
   );
 };
 

@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import EditIssueButton from "./EditIssueButton";
 import IssueDetails from "./IssueDetails";
+import DeleteIssueButton from "./DeleteIssueButton";
 
 interface Props {
   params: {
@@ -21,12 +22,15 @@ const page = async ({ params }: Props) => {
   if (!issue) notFound();
 
   return (
-    <Grid columns={{ initial: "1", md: "2" }} gap={"5"}>
-      <Box>
+    <Grid columns={{ initial: "1", sm: "5" }} gap={"5"}>
+      <Box className="md:col-span-4">
         <IssueDetails issue={issue}></IssueDetails>
       </Box>
       <Box>
-        <EditIssueButton issueId={issue.Id} />
+        <Flex direction="column" gap={"4"} className="max-w-full">
+          <EditIssueButton issueId={issue.Id} />
+          <DeleteIssueButton issueId={issue.Id} />
+        </Flex>
       </Box>
     </Grid>
   );
