@@ -54,6 +54,7 @@ const IssueForm = ({ issue }: Prop) => {
             if (issue) await axios.put("/api/issues/" + issue.Id, data);
             else await axios.post("/api/issues", data);
             router.push("/issues");
+            router.refresh();
           } catch (error) {
             setIsLoading(false);
             setError("An unexpected error occured");
