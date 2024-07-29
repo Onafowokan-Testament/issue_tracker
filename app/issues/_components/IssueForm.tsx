@@ -51,7 +51,8 @@ const IssueForm = ({ issue }: Prop) => {
         onSubmit={handleSubmit(async (data) => {
           try {
             setIsLoading(true);
-            await axios.post("/api/issues", data);
+            if (issue) await axios.put("/api/issues/" + issue.Id, data);
+            else await axios.post("/api/issues", data);
             router.push("/issues");
           } catch (error) {
             setIsLoading(false);
@@ -84,7 +85,7 @@ const IssueForm = ({ issue }: Prop) => {
         "
           disabled={isLoading}
         >
-          Create new Issue
+          {issue ? "Update" : "Submit"}
           {isLoading && <Spinner />}
         </Button>
       </form>

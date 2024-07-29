@@ -7,7 +7,7 @@ const loading = () => {
   return (
     <div className="max-w-xl">
       <Skeleton />
-      <Skeleton width={"5px"} />
+      <Skeleton height={50} />
     </div>
   );
 };
