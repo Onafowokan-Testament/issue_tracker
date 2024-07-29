@@ -1,6 +1,6 @@
 "use client";
 
-import { AlertDialog, Button, Flex } from "@radix-ui/themes";
+import { AlertDialog, Button, Flex, Spinner } from "@radix-ui/themes";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -13,12 +13,16 @@ interface Props {
 
 const DeleteIssueButton = ({ issueId }: Props) => {
   const [isError, setIsError] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
   return (
     <>
       <AlertDialog.Root>
         <AlertDialog.Trigger>
-          <Button color="red">Delete</Button>
+          <Button color="red" disabled={isDeleting}>
+            Delete
+            {isDeleting && <Spinner />}
+          </Button>
         </AlertDialog.Trigger>
         <AlertDialog.Content maxWidth="450px">
           <AlertDialog.Title>confirm delete</AlertDialog.Title>
@@ -39,10 +43,12 @@ const DeleteIssueButton = ({ issueId }: Props) => {
                 color="red"
                 onClick={async () => {
                   try {
+                    setIsDeleting(true);
                     await axios.delete("/api/issues/" + issueId);
                     router.push("/issues");
                     router.refresh();
                   } catch (error) {
+                    setIsDeleting(false);
                     setIsError(true);
                   }
                 }}
