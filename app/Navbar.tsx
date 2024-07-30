@@ -13,9 +13,11 @@ import {
   Avatar,
   Text,
 } from "@radix-ui/themes";
+import Skeleton from "react-loading-skeleton";
 
 const Navbar = () => {
   const { status, data: session } = useSession();
+
   const NavLinks = [
     {
       label: "Dashboard",
@@ -25,6 +27,7 @@ const Navbar = () => {
   ];
 
   const currentPath = usePathname();
+
   return (
     <nav className="border-b   py-3  px-5 mb-5 ">
       <Container>
