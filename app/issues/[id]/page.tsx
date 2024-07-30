@@ -34,7 +34,7 @@ const page = async ({ params }: Props) => {
       {session && (
         <Box>
           <Flex direction="column" gap={"4"} className="max-w-full">
-            <AssignIssue id={issue.Id}></AssignIssue>
+            <AssignIssue issue={issue}></AssignIssue>
             <EditIssueButton issueId={issue.Id} />
             <DeleteIssueButton issueId={issue.Id} />
           </Flex>
