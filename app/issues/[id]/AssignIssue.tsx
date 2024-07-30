@@ -4,16 +4,23 @@ import { User } from "@prisma/client";
 import { Select } from "@radix-ui/themes";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import Skeleton from "react-loading-skeleton";
 
 const AssignIssue = async ({ id }: { id: number }) => {
-  const [users, setUsers] = useState<User[]>([]);
-  useEffect(() => {
-    const fetch_users = async () => {
-      const data = (await axios.get<User[]>("/api/users")).data;
-      setUsers(data);
-    };
-    fetch_users();
-  }, []);
+  const {
+    data: users,
+    error,
+    isLoading,
+  } = useQuery({
+    queryKey: ["users"],
+    queryFn: () => axios.get<User[]>("/api/users/").then((res) => res.data),
+    staleTime: 60 * 1000,
+    retry: 3,
+  });
+
+  if (isLoading) return <Skeleton></Skeleton>;
+  if (error) return null;
   return (
     <Select.Root>
       <Select.Trigger placeholder="Assign..." />
@@ -21,7 +28,7 @@ const AssignIssue = async ({ id }: { id: number }) => {
       <Select.Content>
         <Select.Group>
           <Select.Label>users</Select.Label>
-          {users.map((user) => (
+          {users?.map((user) => (
             <Select.Item value={user.id} key={user.id}>
               {user.name}
             </Select.Item>
