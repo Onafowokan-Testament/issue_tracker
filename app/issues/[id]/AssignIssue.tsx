@@ -6,7 +6,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Skeleton from "react-loading-skeleton";
-
+import toast, { Toaster } from "react-hot-toast";
 interface Prop {
   issue: Issue;
 }
@@ -25,28 +25,35 @@ const AssignIssue = ({ issue }: Prop) => {
   if (isLoading) return <Skeleton></Skeleton>;
   if (error) return null;
   return (
-    <Select.Root
-      defaultValue={issue.assignedUserId || " "}
-      onValueChange={(userId) => {
-        axios.put(`/api/issues/${issue.Id}`, {
-          assignedUserId: userId || null,
-        });
-      }}
-    >
-      <Select.Trigger placeholder="Assign..." />
+    <>
+      <Select.Root
+        defaultValue={issue.assignedUserId || " "}
+        onValueChange={(userId) => {
+          axios
+            .put(`/api/issues/${issue.Id}`, {
+              assignedUserId: userId || null,
+            })
+            .catch(() => {
+              toast.error("Changes could not be saved");
+            });
+        }}
+      >
+        <Select.Trigger placeholder="Assign..." />
 
-      <Select.Content>
-        <Select.Group>
-          <Select.Label>users</Select.Label>
-          {/* <Select.Item value="">Unassigned</Select.Item> */}
-          {users?.map((user) => (
-            <Select.Item value={user.id} key={user.id}>
-              {user.name}
-            </Select.Item>
-          ))}
-        </Select.Group>
-      </Select.Content>
-    </Select.Root>
+        <Select.Content>
+          <Select.Group>
+            <Select.Label>users</Select.Label>
+            {/* <Select.Item value="">Unassigned</Select.Item> */}
+            {users?.map((user) => (
+              <Select.Item value={user.id} key={user.id}>
+                {user.name}
+              </Select.Item>
+            ))}
+          </Select.Group>
+        </Select.Content>
+      </Select.Root>
+      <Toaster />
+    </>
   );
 };
 
