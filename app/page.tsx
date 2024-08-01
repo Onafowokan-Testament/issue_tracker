@@ -3,6 +3,7 @@ import Pagination from "./components/Pagination";
 import LatesetIssues from "./LatesetIssues";
 import IssueSummary from "./IssueSummary";
 import prisma from "@/prisma/client";
+import IssueChart from "./IssueChart";
 
 interface Props {
   searchParams: {
@@ -22,8 +23,11 @@ export default async function Home({ searchParams }: Props) {
   });
   return (
     <>
-      <div>Hello world</div>
-      <IssueSummary open={open} inProgress={in_progress} closed={closed} />
+      <IssueChart
+        open={open}
+        closed={closed}
+        inProgress={in_progress}
+      ></IssueChart>
     </>
   );
 }
