@@ -7,8 +7,19 @@ import StatusIssueBadge from "../components/StatusIssueBadge";
 import IssueAction from "./IssueAction";
 import Link from "../components/Link";
 
-const IssueTracker = async () => {
-  const issues = await prisma.issue.findMany();
+const IssueTracker = async ({
+  searchParams,
+}: {
+  searchParams: { status: Status };
+}) => {
+  const statuses = Object.values(Status);
+
+  const status = statuses.includes(searchParams.status)
+    ? searchParams.status
+    : undefined;
+  const issues = await prisma.issue.findMany({
+    where: { status: status },
+  });
 
   await delay(2000);
   return (
