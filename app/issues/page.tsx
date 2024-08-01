@@ -10,6 +10,7 @@ import classNames from "classnames";
 import NextLink from "next/link";
 import { FaArrowUp } from "react-icons/fa6";
 import Pagination from "../components/Pagination";
+import { Metadata } from "next";
 
 const IssueTracker = async ({
   searchParams,
@@ -85,7 +86,10 @@ const IssueTracker = async ({
             <Table.Row key={issue.Id}>
               <Table.Cell>
                 <Link href={`/issues/${issue.Id}`}>{issue.title}</Link>
-                <div className="block md:hidden">{issue.status}</div>
+                <div className="block md:hidden">
+                  {" "}
+                  <StatusIssueBadge status={issue.status}></StatusIssueBadge>
+                </div>
               </Table.Cell>
               <Table.Cell className=" hidden md:table-cell">
                 <StatusIssueBadge status={issue.status}></StatusIssueBadge>
@@ -107,3 +111,8 @@ const IssueTracker = async ({
 };
 
 export default IssueTracker;
+
+export const metadata: Metadata = {
+  title: "Issue Tracker --issue list",
+  description: "List of all issues",
+};

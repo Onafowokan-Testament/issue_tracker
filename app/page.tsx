@@ -4,6 +4,8 @@ import LatesetIssues from "./LatesetIssues";
 import IssueSummary from "./IssueSummary";
 import prisma from "@/prisma/client";
 import IssueChart from "./IssueChart";
+import { Flex, Grid } from "@radix-ui/themes";
+import { Metadata } from "next";
 
 interface Props {
   searchParams: {
@@ -22,12 +24,26 @@ export default async function Home({ searchParams }: Props) {
     where: { status: "IN_PROGRESS" },
   });
   return (
-    <>
-      <IssueChart
-        open={open}
-        closed={closed}
-        inProgress={in_progress}
-      ></IssueChart>
-    </>
+    <Grid columns={{ initial: "1", md: "2" }} gap={"5"}>
+      <Flex direction="column" gap={"5"}>
+        <IssueSummary
+          open={open}
+          closed={closed}
+          inProgress={in_progress}
+        ></IssueSummary>
+
+        <IssueChart
+          open={open}
+          closed={closed}
+          inProgress={in_progress}
+        ></IssueChart>
+      </Flex>
+      <LatesetIssues />
+    </Grid>
   );
+}
+
+export const metadata:Metadata ={
+  title: 'Issue Tracker --Dashboard',
+  description:'View a summary of project issues'
 }
