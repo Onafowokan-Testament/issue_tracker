@@ -59,7 +59,7 @@ const IssueTracker = async ({
   return (
     <div>
       <IssueAction></IssueAction>
-      <Table.Root variant="surface">
+      <Table.Root variant="surface" className="my-5">
         <Table.Header>
           <Table.Row>
             {headers.map((header) => (

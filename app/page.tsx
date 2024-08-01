@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Pagination from "./components/Pagination";
+import LatesetIssues from "./LatesetIssues";
 
 interface Props {
   searchParams: {
@@ -11,12 +12,7 @@ export default function Home({ searchParams }: Props) {
   return (
     <>
       <div>Hello world</div>
-
-      <Pagination
-        pageSize={10}
-        currentPage={parseInt(searchParams.page)}
-        itemCount={40}
-      ></Pagination>
+      <LatesetIssues />
     </>
   );
 }
