@@ -26,7 +26,6 @@ export default function RootLayout({
           <AuthProvider>
             <Theme accentColor="iris" grayColor="mauve">
               <Navbar />
-
               <main className="px-10">
                 <Container>{children}</Container>
               </main>
