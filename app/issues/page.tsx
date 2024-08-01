@@ -9,11 +9,12 @@ import Link from "../components/Link";
 import classNames from "classnames";
 import NextLink from "next/link";
 import { FaArrowUp } from "react-icons/fa6";
+import Pagination from "../components/Pagination";
 
 const IssueTracker = async ({
   searchParams,
 }: {
-  searchParams: { status: Status; orderBy: keyof Issue };
+  searchParams: { status: Status; orderBy: keyof Issue; page: string };
 }) => {
   const statuses = Object.values(Status);
 
@@ -22,12 +23,20 @@ const IssueTracker = async ({
     : undefined;
 
   const orderByField = searchParams.orderBy || "createdAt";
+
+  const page = parseInt(searchParams.page) || 1;
+  const pageSize = 10;
   const issues = await prisma.issue.findMany({
     where: { status: status },
     orderBy: {
       [orderByField]: "desc",
     },
+
+    skip: (page - 1) * pageSize,
+    take: pageSize,
   });
+
+  const issueSize = await prisma.issue.count({ where: { status: status } });
 
   // const select = status ? status : " ";
   // const query = select === "all" ? "" : `?status=${status}`;
@@ -88,6 +97,11 @@ const IssueTracker = async ({
           ))}
         </Table.Body>
       </Table.Root>
+      <Pagination
+        pageSize={pageSize}
+        currentPage={page}
+        itemCount={issueSize}
+      ></Pagination>
     </div>
   );
 };
