@@ -25,13 +25,11 @@ export async function PUT(request: NextRequest, { params }: Props) {
       where: { id: assignedUserId },
     });
 
-    if (!user) {
+    if (!user)
       return (
         NextResponse.json({ error: "User does not exist" }), { status: 400 }
       );
-    }
   }
-
   const issue = await prisma.issue.findUnique({
     where: { Id: params.id },
   });
