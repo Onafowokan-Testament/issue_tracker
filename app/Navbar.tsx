@@ -61,7 +61,7 @@ const Navbar = () => {
               <DropdownMenu.Root>
                 <DropdownMenu.Trigger>
                   <Avatar
-                    src={session!.user!.image!}
+                    src={session.user!.image!}
                     fallback="?"
                     size={"2"}
                     radius="full"
@@ -71,7 +71,7 @@ const Navbar = () => {
 
                 <DropdownMenu.Content>
                   <DropdownMenu.Label>
-                    <Text>{session!.user!.email}</Text>
+                    <Text>{session.user!.email}</Text>
                   </DropdownMenu.Label>
                   <DropdownMenu.Item>
                     <Link href={"/api/auth/signout"}>Logout</Link>
