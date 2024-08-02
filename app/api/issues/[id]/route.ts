@@ -33,7 +33,7 @@ export async function PUT(request: NextRequest, { params }: Props) {
   }
 
   const issue = await prisma.issue.findUnique({
-    where: { Id: parseInt(params.id) },
+    where: { Id: params.id },
   });
 
   if (!issue)
@@ -51,7 +51,7 @@ export async function DELETE(request: NextRequest, { params }: Props) {
   const session = await getServerSession(OptionAuth);
   if (!session) return NextResponse.json({}, { status: 401 });
   const issue = await prisma.issue.findUnique({
-    where: { Id: parseInt(params.id) },
+    where: { Id: params.id },
   });
 
   if (!issue)
