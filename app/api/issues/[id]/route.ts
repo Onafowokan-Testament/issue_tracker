@@ -12,12 +12,12 @@ interface Props {
 
 export async function PUT(request: NextRequest, { params }: Props) {
   const session = await getServerSession(OptionAuth);
-  if (!session) return NextResponse.json({}, { status: 401 });
+  if (!session) return NextResponse.json({}, { status: 400 });
 
   const body = await request.json();
   const validation = patchIssueSchema.safeParse(body);
   if (!validation.success)
-    return NextResponse.json(validation.error?.errors, { status: 400 });
+    return NextResponse.json(validation.error.format(), { status: 400 });
 
   const { assignedUserId, title, description } = body;
   if (assignedUserId) {
@@ -37,14 +37,14 @@ export async function PUT(request: NextRequest, { params }: Props) {
   });
 
   if (!issue)
-    return NextResponse.json({ error: "invalid issue" }, { status: 40 });
+    return NextResponse.json({ error: "invalid issue" }, { status: 404 });
 
   const updatedIssue = await prisma.issue.update({
     where: { Id: issue.Id },
     data: { title, description, assignedUserId },
   });
 
-  return NextResponse.json(updatedIssue, { status: 201 });
+  return NextResponse.json(updatedIssue);
 }
 
 export async function DELETE(request: NextRequest, { params }: Props) {
