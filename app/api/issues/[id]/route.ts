@@ -10,7 +10,7 @@ interface Props {
   params: { id: string };
 }
 
-export async function PUT(request: NextRequest, { params }: Props) {
+export async function PATCH(request: NextRequest, { params }: Props) {
   const session = await getServerSession(OptionAuth);
   if (!session) return NextResponse.json({}, { status: 400 });
 

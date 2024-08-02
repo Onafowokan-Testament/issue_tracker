@@ -30,7 +30,7 @@ const AssignIssue = ({ issue }: Prop) => {
         defaultValue={issue.assignedUserId || " "}
         onValueChange={(userId) => {
           axios
-            .put(`/api/issues/${issue.Id}`, {
+            .patch(`/api/issues/${issue.Id}`, {
               assignedUserId: userId || null,
             })
             .catch(() => {
