@@ -25,10 +25,8 @@ export async function PATCH(request: NextRequest, { params }: Props) {
       where: { id: assignedUserId },
     });
 
-    if (!user)
-      return (
-        NextResponse.json({ error: "User does not exist" }), { status: 400 }
-      );
+    if (!user) return;
+    NextResponse.json({ error: "User does not exist" }, { status: 400 });
   }
   const issue = await prisma.issue.findUnique({
     where: { Id: params.id },
@@ -42,7 +40,7 @@ export async function PATCH(request: NextRequest, { params }: Props) {
     data: { title, description, assignedUserId },
   });
 
-  return NextResponse.json(updatedIssue);
+  return Response.json({});
 }
 
 export async function DELETE(request: NextRequest, { params }: Props) {

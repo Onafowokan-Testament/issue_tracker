@@ -11,12 +11,10 @@ import NextLink from "next/link";
 import { FaArrowUp } from "react-icons/fa6";
 import Pagination from "../components/Pagination";
 import { Metadata } from "next";
-
-const IssueTracker = async ({
-  searchParams,
-}: {
+interface Prop {
   searchParams: { status: Status; orderBy: keyof Issue; page: string };
-}) => {
+}
+const IssueTracker = async ({ searchParams }: Prop) => {
   const statuses = Object.values(Status);
 
   const status = statuses.includes(searchParams.status)
