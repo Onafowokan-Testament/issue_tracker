@@ -26,7 +26,7 @@ const LatesetIssues = async () => {
               <Table.Cell>
                 <Flex justify={"between"}>
                   <Flex direction={"column"} align={"start"} gap={"2"}>
-                    <Link href={`/issues/ ${issue.Id}`}>{issue.title}</Link>
+                    <Link href={`/issues/${issue.Id}`}> {issue.title}</Link>
                     <StatusIssueBadge status={issue.status} />
                   </Flex>
                   {issue.assignedUserId && (
