@@ -39,7 +39,7 @@ const Navbar = () => {
 
             <ul className="flex space-x-5">
               {NavLinks.map((navlink) => (
-                <li>
+                <li key={navlink.label}>
                   <Link
                     href={navlink.href}
                     className={classnames({
