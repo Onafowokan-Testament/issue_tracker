@@ -1,7 +1,7 @@
 import { Status } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import prisma from "../../../prisma/client";
+import prisma from "../../../prisma/clients";
 import createIssueSchema from "@/app/validationSchema";
 import { notFound } from "next/navigation";
 import { getServerSession } from "next-auth";

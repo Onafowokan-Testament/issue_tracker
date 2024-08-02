@@ -1,4 +1,4 @@
-import prisma from "@/prisma/client";
+import prisma from "@/prisma/clients";
 import IssueForm from "../../_components/IssueForm";
 import { notFound } from "next/navigation";
 interface Prop {

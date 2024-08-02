@@ -2,7 +2,7 @@ import Image from "next/image";
 import Pagination from "./components/Pagination";
 import LatesetIssues from "./LatesetIssues";
 import IssueSummary from "./IssueSummary";
-import prisma from "@/prisma/client";
+import prisma from "@/prisma/clients";
 import IssueChart from "./IssueChart";
 import { Flex, Grid } from "@radix-ui/themes";
 import { Metadata } from "next";
@@ -43,7 +43,7 @@ export default async function Home({ searchParams }: Props) {
   );
 }
 
-export const metadata:Metadata ={
-  title: 'Issue Tracker --Dashboard',
-  description:'View a summary of project issues'
-}
+export const metadata: Metadata = {
+  title: "Issue Tracker --Dashboard",
+  description: "View a summary of project issues",
+};

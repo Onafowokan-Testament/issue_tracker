@@ -1,5 +1,5 @@
 import StatusIssueBadge from "@/app/components/StatusIssueBadge";
-import prisma from "@/prisma/client";
+import prisma from "@/prisma/clients";
 import { Box, Button, Card, Flex, Grid, Heading, Text } from "@radix-ui/themes";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -19,7 +19,7 @@ interface Props {
   };
 }
 
-const fetchUser = cache((IssueId: number) =>
+const fetchUser = cache((IssueId: string) =>
   prisma.issue.findUnique({
     where: { Id: IssueId },
   })
@@ -27,7 +27,7 @@ const fetchUser = cache((IssueId: number) =>
 
 const page = async ({ params }: Props) => {
   const session = await getServerSession(OptionAuth);
-  const issue = await fetchUser(parseInt(params.id));
+  const issue = await fetchUser(params.id);
 
   if (!issue) notFound();
 
@@ -53,7 +53,7 @@ const page = async ({ params }: Props) => {
 export default page;
 
 export async function generateMetadata({ params }: Props) {
-  const issue = await fetchUser(parseInt(params.id));
+  const issue = await fetchUser(params.id);
 
   return {
     title: issue?.title,

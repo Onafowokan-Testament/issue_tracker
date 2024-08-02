@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 interface Props {
-  issueId: number;
+  issueId: string;
 }
 
 const DeleteIssueButton = ({ issueId }: Props) => {

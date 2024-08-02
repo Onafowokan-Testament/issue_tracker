@@ -1,4 +1,4 @@
-import prisma from "@/prisma/client";
+import prisma from "@/prisma/clients";
 import { Avatar, Card, Flex, Heading, Table } from "@radix-ui/themes";
 
 import React from "react";
