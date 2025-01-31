@@ -1,4 +1,4 @@
-# Issue Tracker with Next.js and MongoDB 🐛
+#Ambassadors School Issue Tracker (Intern)
 
 Welcome to the **Issue Tracker**! This is a full-stack application built with **Next.js** (React framework) and **MongoDB** for tracking and managing software development issues. It provides a seamless user interface for creating, updating, and resolving issues, making it an essential tool for development teams.
 
